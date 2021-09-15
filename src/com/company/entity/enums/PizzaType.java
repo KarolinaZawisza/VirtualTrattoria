@@ -1,9 +1,9 @@
 package com.company.entity.enums;
 
-import java.time.chrono.MinguoDate;
+import java.io.Serializable;
 import java.util.*;
 
-public enum PizzaType {
+public enum PizzaType implements Serializable {
     MARGHERITA("Margherita"),
     CAPRICIOSA("Capriciosa"),
     CALZONE("Calzone");
@@ -22,6 +22,15 @@ public enum PizzaType {
 
     public String getName() {
         return name;
+    }
+
+    public static String getAllNamesAsString() {
+        List<String> allNames = new LinkedList<>();
+        for (PizzaType pizzaType : PizzaType.values()) {
+            allNames.add(pizzaType.getName());
+        }
+
+        return String.join(", ", allNames);
     }
 
     @Override
@@ -56,7 +65,5 @@ public enum PizzaType {
         ingredients.add(Ingredient.HAM);
 
         pizzaIngredientSet.put(PizzaType.CAPRICIOSA, ingredients);
-
-
     }
 }

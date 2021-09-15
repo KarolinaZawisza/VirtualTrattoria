@@ -1,6 +1,8 @@
 package com.company.entity.enums;
 
-public enum Ingredient {
+import java.io.Serializable;
+
+public enum Ingredient implements Serializable {
     CHEESE("Cheese"),
     TOMATO("Tomato"),
     BASIL("Basil"),

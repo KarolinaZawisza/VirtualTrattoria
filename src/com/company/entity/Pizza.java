@@ -3,9 +3,10 @@ package com.company.entity;
 import com.company.entity.enums.Ingredient;
 import com.company.entity.enums.PizzaType;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Pizza {
+public class Pizza implements Serializable {
     PizzaType pizzaType;
     Set<Ingredient> ingredients;
 
@@ -22,11 +23,17 @@ public class Pizza {
         return ingredients.remove(ingredient);
     }
 
+    public boolean hasNoIngredients() {
+        return ingredients.isEmpty();
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
     @Override
     public String toString() {
-        return "Pizza{" +
-                "pizzaType=" + pizzaType +
-                ", ingredients=" + ingredients +
-                '}';
+        return "Pizza " + pizzaType +
+                ": " + ingredients;
     }
 }
