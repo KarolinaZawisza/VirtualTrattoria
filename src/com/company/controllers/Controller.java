@@ -34,7 +34,7 @@ public class Controller {
     }
 
     public void execute() {
-        ConsoleUtils.writeToConsole("Enter \"order\" to place new order or exit to close the app:");
+        ConsoleUtils.writeToConsole("Enter \"order\" to place new order or \"exit\" to close the app:");
         String readStringFromUser = ConsoleUtils.readStringFromUser();
         if (readStringFromUser != null) {
             switch (readStringFromUser.toLowerCase()) {
@@ -54,7 +54,7 @@ public class Controller {
     private void handleOrderCommand() {
         String author;
         do {
-            ConsoleUtils.writeToConsole("Author:");
+            ConsoleUtils.writeToConsole("Author (please enter your name):");
             author = ConsoleUtils.readStringFromUser();
         } while (ifAuthorIsCorrect(author));
         Order order = new Order(author);
@@ -75,7 +75,7 @@ public class Controller {
     private Pizza obtainPizza() {
         PizzaType pizzaType = null;
         do {
-            ConsoleUtils.writeToConsole("Types available: " + obtainAvailableTypes());
+            ConsoleUtils.writeToConsole("Types available: " + obtainAvailableTypes() + ". If you're done with your order, you can type \"end\" to finish your order.");
             String pizzaTypeStringFromUser = ConsoleUtils.readStringFromUser();
             if (pizzaTypeStringFromUser != null) {
                 if (pizzaTypeStringFromUser.equals("end")) {
@@ -95,7 +95,7 @@ public class Controller {
 
     private void validatePizza(Pizza pizza) {
         if(pizza.hasNoIngredients()) {
-            throw new IllegalArgumentException("Pizza has to contains at least one ingredients. Pizza was not added to order."); //FIXME catch this shit i'm out
+            throw new IllegalArgumentException("Pizza has to contains at least one ingredients. Pizza was not added to order.");
         }
     }
 
@@ -154,7 +154,7 @@ public class Controller {
             Ingredient ingredient = Ingredient.valueOf(ingredientAsString);
             pizza.removeIngredient(ingredient);
         } catch (IllegalArgumentException e) {
-            ConsoleUtils.writeToConsole("Invalid ingredient.");
+            ConsoleUtils.writeToConsole("Invalid ingredient. Please try again.");
         }
     }
 
@@ -167,7 +167,7 @@ public class Controller {
     }
 
     private void handleIncorrectCommand() {
-        ConsoleUtils.writeToConsole("Invalid command.");
+        ConsoleUtils.writeToConsole("Invalid command. Please try again.");
     }
 
     private PizzaType obtainPizzaType(String stringFromUser) {
@@ -175,7 +175,7 @@ public class Controller {
         try {
             pizzaType = PizzaType.valueOf(stringFromUser.toUpperCase());
         } catch (IllegalArgumentException e) {
-            ConsoleUtils.writeToConsole("Please type correctly you Fucking Bastard.");
+            ConsoleUtils.writeToConsole("Invalid pizza type. Please try again.");
         }
         return pizzaType;
     }

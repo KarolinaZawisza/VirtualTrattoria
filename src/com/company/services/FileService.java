@@ -7,7 +7,7 @@ import java.io.*;
 
 public class FileService {
     public void writeOrderDatabaseToFile(OrderDatabase orderDatabase, String fileName) {
-        try ( //TODO try catch with resources
+        try (
                 FileOutputStream fileOutputStream = new FileOutputStream(fileName);
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
         ) {
